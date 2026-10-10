@@ -1,0 +1,27 @@
+name: vanuatu_plate
+description: "Vanuatu's licence plates for the plate_core library — the white-on-black palm plate and the red-on-green diplomatic plate, with themes, alphabets and advisory validators."
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plate_core: ^0.11.5
+  plate_alphabet: ^0.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  # Two palm-tree decals cropped from the Commons photograph
+  # Kfz-Kennzeichen Vanuatu retouched.jpg (white on alpha).
+  assets:
+    - assets/icons/palm_left.png
+    - assets/icons/palm_right.png
