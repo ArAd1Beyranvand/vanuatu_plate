@@ -17,7 +17,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:vanuatu_plate/vanuatu_plate.dart';
 
 PlateCanvas(
-  spec: VanuatuPlates.standard(),
+  spec: VanuatuPlates.standard,
   theme: VanuatuThemes.standard,
   validator: const VanuatuValidator(),
   autoValidate: true,
@@ -50,7 +50,6 @@ PlateCanvas(
 - [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
 - [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
 - [`italy_plate`](https://pub.dev/packages/italy-plate) - Italy's licence plates.
-- [`kazakhstan_plate`](https://pub.dev/packages/kazakhstan-plate) - Kazakhstan's licence plates.
 - [`kyrgyzstan_plate`](https://pub.dev/packages/kyrgyzstan-plate) - Kyrgyzstan's licence plates.
 - [`laos_plate`](https://pub.dev/packages/laos-plate) - Laos's licence plates.
 - [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.

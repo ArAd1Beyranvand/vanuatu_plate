@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -63,10 +65,11 @@ abstract final class _Layout {
 
 /// Vanuatu's plate geometries.
 ///
-/// * [standard] — white on black, 1–5 digits ([digits] defaults to 4), with a
-///   palm tree either side and "Republic of Vanuatu" in the bottom border.
-///   The article shows a five-digit plate without palms; only the palm design
-///   has a measurable reference, so the five-digit variant uses it too.
+/// * [standard] — white on black, 1–5 digits in one field laid out for five
+///   and centred, so a four-digit number sits where the photograph has it,
+///   with a palm tree either side and "Republic of Vanuatu" in the bottom
+///   border. The article shows a five-digit plate without palms; only the palm
+///   design has a measurable reference, so every length uses it.
 /// * [diplomatic] — red on green, four letters and one digit (`CDNZ 7`).
 ///
 /// Palms are decals cropped from the Commons photograph (white on alpha): a
@@ -76,10 +79,6 @@ abstract final class _Layout {
 /// [standard] has one text group, `number`; [diplomatic] has `code` and
 /// `serial`.
 abstract final class VanuatuPlates {
-  static const List<int> digitLengths = <int>[1, 2, 3, 4, 5];
-
-  static final Map<int, PlateSpec> _standard = <int, PlateSpec>{};
-
   static const AssetImage _palmLeft = AssetImage(
     'assets/icons/palm_left.png',
     package: 'vanuatu_plate',
@@ -89,30 +88,26 @@ abstract final class VanuatuPlates {
     package: 'vanuatu_plate',
   );
 
-  static PlateSpec standard({int digits = 4}) {
-    if (!digitLengths.contains(digits)) {
-      throw ArgumentError('A Vanuatu plate has 1–5 digits (got $digits).');
-    }
-    return _standard[digits] ??= _standardSpec(digits);
-  }
-
-  static PlateSpec _standardSpec(int digits) {
-    final double left = (_Layout.width - digits * _Layout.pitch) / 2;
-    return PlateSpec(
-      id: 'vu.standard.$digits',
+  static final PlateSpec standard = PlateSpec(
+      id: 'vu.standard',
       country: VanuatuCountry.vanuatu,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: plateRegister(
-        alphabet: VanuatuAlphabets.digits,
-        count: digits,
-        left: left,
-        top: _Layout.slotTop,
-        width: _Layout.pitch,
-        height: _Layout.slotHeight,
-      ),
+      slots: <PlateSlot>[
+        PlateSlot(
+          alphabet: VanuatuAlphabets.digits,
+          box: PlateBox(
+            (_Layout.width - 5 * _Layout.pitch) / 2,
+            _Layout.slotTop,
+            5 * _Layout.pitch,
+            _Layout.slotHeight,
+          ),
+          length: 5,
+          minLength: 1,
+        ),
+      ],
       decals: const <PlateDecal>[
         PlateDecal(
           image: _palmLeft,
@@ -146,13 +141,10 @@ abstract final class VanuatuPlates {
           color: VanuatuColors.white,
         ),
       ],
-      textGroups: <PlateTextGroup>[
-        PlateTextGroup(<int>[
-          for (int i = 0; i < digits; i++) i,
-        ], key: 'number'),
+      textGroups: const <PlateTextGroup>[
+        PlateTextGroup(<int>[0], key: 'number'),
       ],
-    );
-  }
+  );
 
   /// `CDNZ 7`: four letters, a gap, one digit.
   static final PlateSpec diplomatic = PlateSpec(
@@ -163,13 +155,19 @@ abstract final class VanuatuPlates {
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
     slots: <PlateSlot>[
-      ...plateRegister(
+      PlateSlot(
         alphabet: VanuatuAlphabets.letters,
-        count: 4,
-        left: _Layout.dipLetterLeft,
-        top: _Layout.dipSlotTop,
-        width: _Layout.dipLetterPitch,
-        height: _Layout.dipSlotHeight,
+        box: const PlateBox(
+          _Layout.dipLetterLeft,
+          _Layout.dipSlotTop,
+          4 * _Layout.dipLetterPitch,
+          _Layout.dipSlotHeight,
+        ),
+        length: 4,
+        spacing: max(
+          0,
+          _Layout.dipLetterPitch - 0.6 * 0.72 * _Layout.dipSlotHeight,
+        ),
       ),
       PlateSlot(
         alphabet: VanuatuAlphabets.digits,
@@ -182,8 +180,8 @@ abstract final class VanuatuPlates {
       ),
     ],
     textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0, 1, 2, 3], key: 'code'),
-      PlateTextGroup(<int>[4], key: 'serial'),
+      PlateTextGroup(<int>[0], key: 'code'),
+      PlateTextGroup(<int>[1], key: 'serial'),
     ],
   );
 }

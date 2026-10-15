@@ -27,14 +27,24 @@ void main() {
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
         'standard': (
-          VanuatuPlates.standard(),
+          VanuatuPlates.standard,
           VanuatuThemes.standard,
-          '7 9 0 6',
+          '7906',
+        ),
+        'standard_short': (
+          VanuatuPlates.standard,
+          VanuatuThemes.standard,
+          '42',
+        ),
+        'standard_five': (
+          VanuatuPlates.standard,
+          VanuatuThemes.standard,
+          '12345',
         ),
         'diplomatic': (
           VanuatuPlates.diplomatic,
           VanuatuThemes.diplomatic,
-          'C D N Z 7',
+          'CDNZ 7',
         ),
       };
 
@@ -82,4 +92,15 @@ void main() {
       controller.dispose();
     });
   }
+
+  test('the number completes from one digit', () {
+    final PlateController controller = PlateController.fromValues(
+      VanuatuPlates.standard,
+      <String?>['4'],
+    );
+    expect(controller.isCompleted, isTrue);
+    controller.setAt(0, '');
+    expect(controller.isCompleted, isFalse);
+    controller.dispose();
+  });
 }
