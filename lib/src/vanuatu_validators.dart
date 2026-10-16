@@ -2,8 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 /// Judges a `VanuatuPlates.standard` number. Reports, never bars.
 ///
-/// The article gives only the format: one to five digits (`1234`, `12345`).
-/// It documents no ranges, so nothing further is checked.
+/// Only the format is checked: one to five digits.
 class VanuatuValidator extends GatedPlateValidator {
   const VanuatuValidator();
 
@@ -36,7 +35,7 @@ class VanuatuDiplomaticValidator extends GatedPlateValidator {
   @override
   PlateValidation judge(PlateEntry entry) {
     final String code = entry.group('code');
-    if (code.length != 4 || !RegExp(r'^[A-Z]{4}$').hasMatch(code)) {
+    if (!RegExp(r'^[A-Z]{4}$').hasMatch(code)) {
       return const PlateValidation.invalid(reasonCode);
     }
     final String serial = entry.group('serial');

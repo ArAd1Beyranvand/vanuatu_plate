@@ -63,18 +63,10 @@ abstract final class _Layout {
   static const double dipDigitWidth = 49;
 }
 
-/// Vanuatu's plate geometries.
-///
-/// * [standard] — white on black, 1–5 digits in one field laid out for five
-///   and centred, so a four-digit number sits where the photograph has it,
-///   with a palm tree either side and "Republic of Vanuatu" in the bottom
-///   border. The article shows a five-digit plate without palms; only the palm
-///   design has a measurable reference, so every length uses it.
-/// * [diplomatic] — red on green, four letters and one digit (`CDNZ 7`).
-///
-/// Palms are decals cropped from the Commons photograph (white on alpha): a
-/// crest-like drawing no algorithm reproduces. The photograph is
-/// `Kfz-Kennzeichen Vanuatu retouched.jpg`.
+/// [standard] holds 1-5 digits in one field laid out for five and centred, so
+/// a four-digit number sits where the photograph has it. Only the palm design
+/// has a measurable reference, so every length uses it. Palms are decals
+/// cropped from the reference photograph.
 ///
 /// [standard] has one text group, `number`; [diplomatic] has `code` and
 /// `serial`.
@@ -89,61 +81,61 @@ abstract final class VanuatuPlates {
   );
 
   static final PlateSpec standard = PlateSpec(
-      id: 'vu.standard',
-      country: VanuatuCountry.vanuatu,
-      canvasWidth: _Layout.width,
-      canvasHeight: _Layout.height,
-      noPanel: true,
-      panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[
-        PlateSlot(
-          alphabet: VanuatuAlphabets.digits,
-          box: PlateBox(
-            (_Layout.width - 5 * _Layout.pitch) / 2,
-            _Layout.slotTop,
-            5 * _Layout.pitch,
-            _Layout.slotHeight,
-          ),
-          length: 5,
-          minLength: 1,
+    id: 'vu.standard',
+    country: VanuatuCountry.vanuatu,
+    canvasWidth: _Layout.width,
+    canvasHeight: _Layout.height,
+    noPanel: true,
+    panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
+    slots: <PlateSlot>[
+      PlateSlot(
+        alphabet: VanuatuAlphabets.digits,
+        box: PlateBox(
+          (_Layout.width - 5 * _Layout.pitch) / 2,
+          _Layout.slotTop,
+          5 * _Layout.pitch,
+          _Layout.slotHeight,
         ),
-      ],
-      decals: const <PlateDecal>[
-        PlateDecal(
-          image: _palmLeft,
-          box: PlateBox(
-            _Layout.palmLeft,
-            _Layout.palmTop,
-            _Layout.palmWidth,
-            _Layout.palmHeight,
-          ),
+        length: 5,
+        minLength: 1,
+      ),
+    ],
+    decals: const <PlateDecal>[
+      PlateDecal(
+        image: _palmLeft,
+        box: PlateBox(
+          _Layout.palmLeft,
+          _Layout.palmTop,
+          _Layout.palmWidth,
+          _Layout.palmHeight,
         ),
-        PlateDecal(
-          image: _palmRight,
-          box: PlateBox(
-            _Layout.palmRight,
-            _Layout.palmTop,
-            _Layout.palmWidth,
-            _Layout.palmHeight,
-          ),
+      ),
+      PlateDecal(
+        image: _palmRight,
+        box: PlateBox(
+          _Layout.palmRight,
+          _Layout.palmTop,
+          _Layout.palmWidth,
+          _Layout.palmHeight,
         ),
-      ],
-      labels: const <PlateLabel>[
-        PlateLabel(
-          text: 'Republic of Vanuatu',
-          box: PlateBox(
-            _Layout.captionLeft,
-            _Layout.captionTop,
-            _Layout.captionWidth,
-            _Layout.captionHeight,
-          ),
-          glyphHeight: _Layout.captionGlyph,
-          color: VanuatuColors.white,
+      ),
+    ],
+    labels: const <PlateLabel>[
+      PlateLabel(
+        text: 'Republic of Vanuatu',
+        box: PlateBox(
+          _Layout.captionLeft,
+          _Layout.captionTop,
+          _Layout.captionWidth,
+          _Layout.captionHeight,
         ),
-      ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'number'),
-      ],
+        glyphHeight: _Layout.captionGlyph,
+        color: VanuatuColors.white,
+      ),
+    ],
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'number'),
+    ],
   );
 
   /// `CDNZ 7`: four letters, a gap, one digit.

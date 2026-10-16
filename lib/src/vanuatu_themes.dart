@@ -3,7 +3,6 @@ import 'package:plate_core/plate_core.dart';
 
 import 'vanuatu_colors.dart';
 
-/// The Vanuatu liveries.
 abstract final class VanuatuThemes {
   static PlateTheme _plate({
     required Color field,
@@ -23,8 +22,7 @@ abstract final class VanuatuThemes {
     alertColor: const Color(0xFFD32F2F),
   );
 
-  /// White on black inside a white border ~7 mm wide (28 px of the 1488 px
-  /// flattened photo, 134 mm tall).
+  /// The white border is ~7 mm of the 134 mm height.
   static final PlateTheme standard = _plate(
     field: VanuatuColors.black,
     border: VanuatuColors.white,
@@ -33,7 +31,6 @@ abstract final class VanuatuThemes {
     borderWidthRatio: 0.05,
   );
 
-  /// Red on green with a thin dark-red rim: the diplomatic plate.
   static final PlateTheme diplomatic = _plate(
     field: VanuatuColors.diplomaticGreen,
     border: VanuatuColors.diplomaticRim,
