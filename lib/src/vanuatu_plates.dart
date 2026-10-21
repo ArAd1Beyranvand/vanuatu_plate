@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
-import 'package:plate_alphabet/plate_alphabet.dart';
 import 'vanuatu_colors.dart';
 import 'vanuatu_country.dart';
 

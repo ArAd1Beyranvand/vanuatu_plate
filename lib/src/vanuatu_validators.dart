@@ -1,8 +1,7 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Judges a `VanuatuPlates.standard` number. Reports, never bars.
-///
-/// Only the format is checked: one to five digits.
+/// Judges a `VanuatuPlates.standard` number: one to five digits. Reports,
+/// never bars.
 class VanuatuValidator extends GatedPlateValidator {
   const VanuatuValidator();
 
@@ -30,12 +29,13 @@ class VanuatuDiplomaticValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   static const String reasonCode = 'The code is four letters.';
+  static final RegExp _code = RegExp(r'^[A-Z]{4}$');
   static const String reasonSerial = 'The serial is one digit.';
 
   @override
   PlateValidation judge(PlateEntry entry) {
     final String code = entry.group('code');
-    if (!RegExp(r'^[A-Z]{4}$').hasMatch(code)) {
+    if (!_code.hasMatch(code)) {
       return const PlateValidation.invalid(reasonCode);
     }
     final String serial = entry.group('serial');
