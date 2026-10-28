@@ -103,11 +103,21 @@ abstract final class VanuatuPlates {
     decals: const <PlateDecal>[
       PlateDecal(
         image: _palmLeft,
-        box: PlateBox(_Layout.palmLeft, _Layout.palmTop, _Layout.palmWidth, _Layout.palmHeight),
+        box: PlateBox(
+          _Layout.palmLeft,
+          _Layout.palmTop,
+          _Layout.palmWidth,
+          _Layout.palmHeight,
+        ),
       ),
       PlateDecal(
         image: _palmRight,
-        box: PlateBox(_Layout.palmRight, _Layout.palmTop, _Layout.palmWidth, _Layout.palmHeight),
+        box: PlateBox(
+          _Layout.palmRight,
+          _Layout.palmTop,
+          _Layout.palmWidth,
+          _Layout.palmHeight,
+        ),
       ),
     ],
     labels: const <PlateLabel>[
@@ -146,7 +156,10 @@ abstract final class VanuatuPlates {
           _Layout.dipSlotHeight,
         ),
         length: 4,
-        spacing: max(0, _Layout.dipLetterPitch - 0.6 * 0.72 * _Layout.dipSlotHeight),
+        spacing: max(
+          0,
+          _Layout.dipLetterPitch - 0.6 * 0.72 * _Layout.dipSlotHeight,
+        ),
       ),
       PlateSlot(
         alphabet: VanuatuAlphabets.digits,
