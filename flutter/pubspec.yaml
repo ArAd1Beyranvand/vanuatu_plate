@@ -1,7 +1,7 @@
 name: vanuatu_plate
 description: "Vanuatu's licence plates for the plate_core library — the white-on-black palm plate and the red-on-green diplomatic plate, with themes, alphabets and advisory validators."
 version: 0.1.0
-repository: https://github.com/ArAd1Beyranvand/vanuatu_plate
+repository: https://github.com/ArAd1Beyranvand/vanuatu_plate/tree/main/flutter
 resolution: workspace
 
 environment:
