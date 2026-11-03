@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -27,39 +25,28 @@ import 'vanuatu_country.dart';
 /// diplomatic one is limited by cell width (the artwork's face is condensed,
 /// DejaVu is not).
 abstract final class _Layout {
-  static const double width = 372;
-  static const double height = 134;
+  static const double width = 372, height = 134;
 
   // Standard.
-  static const double pitch = 65.9;
-  static const double slotHeight = 118;
+  static const double pitch = 65.9, slotHeight = 118;
 
   /// Digit ink centre 67.5, slot centred on it.
   static const double slotTop = 8.5;
 
-  static const double palmTop = 20;
-  static const double palmWidth = 42.5;
-  static const double palmHeight = 83.75;
-  static const double palmLeft = 13.75;
-  static const double palmRight = 317.5;
+  static const double palmTop = 20, palmWidth = 42.5, palmHeight = 83.75;
+  static const double palmLeft = 13.75, palmRight = 317.5;
 
   /// The caption's box. On the reference it sits in a gap in the bottom
   /// border (cap tops at y 120, below the field's edge at 127), which the
   /// engine cannot cut — the frame is painted over the background and clips
   /// bands to the face — so it is lifted into the field, centred at 120.
-  static const double captionLeft = 102;
-  static const double captionWidth = 169;
+  static const double captionLeft = 102, captionWidth = 169;
 
-  static const double captionGlyph = 18;
-  static const double captionTop = 112;
-  static const double captionHeight = 16;
+  static const double captionGlyph = 18, captionTop = 112, captionHeight = 16;
 
   // Diplomatic.
-  static const double dipLetterLeft = 46;
-  static const double dipLetterPitch = 54;
-  static const double dipSlotHeight = 90;
-  static const double dipSlotTop = 21;
-  static const double dipDigitLeft = 287;
+  static const double dipLetterLeft = 46, dipLetterPitch = 54;
+  static const double dipSlotHeight = 90, dipSlotTop = 21, dipDigitLeft = 287;
   static const double dipDigitWidth = 49;
 }
 
@@ -71,9 +58,6 @@ abstract final class _Layout {
 /// [standard] has one text group, `number`; [diplomatic] has `code` and
 /// `serial`.
 abstract final class VanuatuPlates {
-  // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-  // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-  // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
   static const AssetImage _palmLeft = AssetImage(
     'assets/icons/palm_left.png',
     package: 'vanuatu_plate',
@@ -101,6 +85,7 @@ abstract final class VanuatuPlates {
         ),
         length: 5,
         minLength: 1,
+        group: 'number',
       ),
     ],
     decals: const <PlateDecal>[
@@ -136,9 +121,6 @@ abstract final class VanuatuPlates {
         color: VanuatuColors.white,
       ),
     ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'number'),
-    ],
   );
 
   /// `CDNZ 7`: four letters, a gap, one digit.
@@ -150,19 +132,14 @@ abstract final class VanuatuPlates {
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
     slots: <PlateSlot>[
-      PlateSlot(
-        alphabet: VanuatuAlphabets.letters,
-        box: const PlateBox(
-          _Layout.dipLetterLeft,
-          _Layout.dipSlotTop,
-          4 * _Layout.dipLetterPitch,
-          _Layout.dipSlotHeight,
-        ),
-        length: 4,
-        spacing: max(
-          0,
-          _Layout.dipLetterPitch - 0.6 * 0.72 * _Layout.dipSlotHeight,
-        ),
+      plateRun(
+        VanuatuAlphabets.letters,
+        4,
+        left: _Layout.dipLetterLeft,
+        top: _Layout.dipSlotTop,
+        pitch: _Layout.dipLetterPitch,
+        height: _Layout.dipSlotHeight,
+        group: 'code',
       ),
       PlateSlot(
         alphabet: VanuatuAlphabets.digits,
@@ -172,11 +149,8 @@ abstract final class VanuatuPlates {
           _Layout.dipDigitWidth,
           _Layout.dipSlotHeight,
         ),
+        group: 'serial',
       ),
-    ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'code'),
-      PlateTextGroup(<int>[1], key: 'serial'),
     ],
   );
 }

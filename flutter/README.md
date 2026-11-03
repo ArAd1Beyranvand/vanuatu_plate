@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the resilient people of Vanuatu to view examples:
 
-https://platexample.ir/#/discover/vanuatu
+https://platexample.ir/#/discover/vanuatu:flutter
 
 # vanuatu_plate
 
-Vanuatu's licence plates for the `plate_core` library. The 372×134 white-on-black palm plate and the red-on-green diplomatic plate.
+Vanuatu's licence plates for the plate_core library — the white-on-black palm plate and the red-on-green diplomatic plate, with themes, alphabets and advisory validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/vanuatu_plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/vanuatu:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/vanuatu_plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/vanuatu:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/vanuatu_plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/vanuatu:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/vanuatu_plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/vanuatu:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   vanuatu_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,14 +46,26 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `VanuatuCountry` — country panel: `vanuatu`.
-- `VanuatuPlates` — 2 plate specs: `standard`, `diplomatic`.
-- `VanuatuThemes` — 2 themes: `standard`, `diplomatic`.
-- `VanuatuValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `VanuatuDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- 2 bundled assets (`palm_left.png`, `palm_right.png`).
+Each spec is one plate layout.
+
+- `VanuatuPlates.standard` — id `vu.standard`
+- `VanuatuPlates.diplomatic` — id `vu.diplomatic`
+
+## Themes
+
+- `VanuatuThemes.standard`
+- `VanuatuThemes.diplomatic`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `VanuatuPlates`) and `theme:` (an entry of `VanuatuThemes`). Set `validator:` to `VanuatuValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `VanuatuCountry` — the country panel.
+- `VanuatuValidator` — the plate validator.
 
 ## Plates
 
@@ -58,3 +81,6 @@ cropped from the reference photograph.
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/vanuatu_plate/blob/main/LICENSE).

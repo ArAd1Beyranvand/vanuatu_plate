@@ -7,7 +7,6 @@ import 'vanuatu_colors.dart';
 abstract final class VanuatuCountry {
   static const PlateCountry vanuatu = PlateCountry(
     code: 'vu',
-    captionLines: <String>[],
     panelColor: VanuatuColors.black,
     panelTextColor: VanuatuColors.white,
   );
